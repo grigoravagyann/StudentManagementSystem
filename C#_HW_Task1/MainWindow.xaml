@@ -1,0 +1,80 @@
+﻿<Window x:Class="StudentManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Student Manager" Height="600" Width="900"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- Left Section (Forms) -->
+            <ColumnDefinition Width="*"/>
+            <!-- Right Section (DataGrid) -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel (Forms) -->
+        <StackPanel Grid.Column="0" Width="300" Margin="5">
+
+            <!-- Add Student Section -->
+            <GroupBox Header="Add Student" Margin="5">
+                <StackPanel>
+                    <TextBox x:Name="txtName" Text="Enter your Name..." GotFocus="ClearText" Margin="5"/>
+                    <TextBox x:Name="txtAge" Text="Enter your Age..." GotFocus="ClearText" Margin="5"/>
+                    <TextBox x:Name="txtAddress" Text="Enter your Address..." GotFocus="ClearText" Margin="5"/>
+                    <Button Content="Add Student" Click="AddStudent_Click" Margin="5" Width="120"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Search Section -->
+            <GroupBox Header="Search" Margin="5">
+                <StackPanel>
+                    <TextBlock Text="Search by Name" FontWeight="Bold" Margin="5"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBox x:Name="txtSearchName" Width="150" Margin="5"/>
+                        <Button Content="Search" Click="SearchByName_Click" Margin="5" Width="80"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Search by Age" FontWeight="Bold" Margin="5"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBox x:Name="txtSearchAge" Width="150" Margin="5"/>
+                        <Button Content="Search" Click="SearchByAge_Click" Margin="5" Width="80"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Remove Section -->
+            <GroupBox Header="Remove" Margin="5">
+                <StackPanel>
+                    <TextBlock Text="Remove by Name" FontWeight="Bold" Margin="5"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBox x:Name="txtRemoveName" Width="150" Margin="5"/>
+                        <Button Content="Remove" Click="RemoveByName_Click" Margin="5" Width="80"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Remove by Age" FontWeight="Bold" Margin="5" Height="18"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBox x:Name="txtRemoveAge" Width="150" Margin="5"/>
+                        <Button Content="Remove" Click="RemoveByAge_Click" Margin="5" Width="80"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Sorting Buttons -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Content="Sort by Age" Click="SortByAge_Click" Margin="5" Width="100"/>
+                <Button Content="Sort by Name" Click="SortByName_Click" Margin="5" Width="100"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Right Panel (DataGrid) -->
+        <DataGrid Grid.Column="1" ItemsSource="{Binding Students}" AutoGenerateColumns="False" Margin="5"
+                  CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="Auto"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
